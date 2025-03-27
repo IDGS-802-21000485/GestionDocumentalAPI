@@ -41,3 +41,31 @@ exports.eliminarUsuario = async (req, res) => {
     res.status(400).json({ mensaje: "Error al eliminar usuario", error });
   }
 };
+
+// Buscar Usuario por cualquier campo
+exports.buscarUsuarios = async (req, res) => {
+  const { query } = req.query;
+
+  if (!query) {
+    return res.status(400).json({ mensaje: "Debe proporcionar un término de búsqueda." });
+  }
+
+  try {
+    const usuarios = await Usuario.find({
+      $or: [
+        { nombre: { $regex: query, $options: "i" } },
+        { apellido: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } },
+        { telefono: { $regex: query, $options: "i" } }
+      ]
+    });
+
+    if (usuarios.length === 0) {
+      return res.status(404).json({ mensaje: "No se encontraron usuarios." });
+    }
+
+    res.json(usuarios);
+  } catch (error) {
+    res.status(500).json({ mensaje: "Error al buscar usuarios", error });
+  }
+};

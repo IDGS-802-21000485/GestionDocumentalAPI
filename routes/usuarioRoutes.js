@@ -5,13 +5,17 @@ const {
   crearUsuario,
   obtenerUsuarios,
   actualizarUsuario,
-  eliminarUsuario
+  eliminarUsuario,
+  buscarUsuarios
 } = require("../controllers/usuarioController");
 
 // Rutas CRUD
-router.post("/", crearUsuario);            // Crear usuario
-router.get("/", obtenerUsuarios);          // Obtener todos los usuarios
-router.put("/:id", actualizarUsuario);     // Actualizar usuario
-router.delete("/:id", eliminarUsuario);    // Eliminar usuario
+router.post("/", crearUsuario);
+router.get("/", obtenerUsuarios);
+router.put("/:id", actualizarUsuario);
+router.delete("/:id", eliminarUsuario);
+
+// Ruta de búsqueda
+router.get("/buscar", buscarUsuarios);
 
 module.exports = router;
