@@ -5,7 +5,7 @@ const documentoController = require("../controllers/documentoController");
 router.post("/", documentoController.crearDocumento);
 router.get("/", documentoController.obtenerDocumentos);
 router.get("/usuario/:idUsuario", documentoController.buscarDocumentosPorUsuario);
-router.get("/:idDocumento", documentoController.buscarDocumentoPorId);
+router.get("/:idDocumento", documentoController.obtenerDocumentoPorId);
 router.put("/:id", documentoController.actualizarDocumento);
 router.delete("/:id", documentoController.eliminarDocumento);
 
